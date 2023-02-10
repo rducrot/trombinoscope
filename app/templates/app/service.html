@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load mptt_tags %}
+
+{% block content %}
+{% if service.parent %}
+    <a href="{% url 'service' service.parent.id %}"> < Service parent : {{ service.parent.name }}</a>
+{% else %}
+    <a href="{% url 'home' %}">< Retour à la liste des services</a>
+{% endif %}
+    <h2 class="text-primary text-white bg-primary p-2 mb-5">{{ service.name }}</h2>
+{% include 'app/partials/service_detail_snippet.html' %}
+{% endblock %}

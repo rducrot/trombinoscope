@@ -1,0 +1,18 @@
+{% load mptt_tags %}
+
+<div class="container">
+    <div class="row d-flex justify-content-evenly">
+        {% for agent in service.agents.all %}
+            {% include 'app/partials/agent_list_snippet.html' %}
+        {% endfor %}
+    </div>
+</div>
+
+{% recursetree service.children.all %}
+    {% if node.children %}
+        <h3 class="text-primary text-white bg-secondary p-2 mb-5 ml-5">
+            <a href="{% url 'service' node.id %}" class="link-light">{{ node.name }}</a>
+        </h3>
+        {% include 'app/partials/service_detail_snippet.html' with service=node %}
+    {% endif %}
+{% endrecursetree %}

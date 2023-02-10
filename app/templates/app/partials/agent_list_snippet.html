@@ -1,0 +1,13 @@
+<div class="card" style="max-width: 250px;">
+    {% if agent.image %}
+    <img src="{{ agent.image.url }}" class="card-img-top">
+    {% endif %}
+    <div class="card-body">
+        <h4 class="card-title">{{ agent.first_name }} <span
+                style="text-transform: uppercase;">{{ agent.last_name }}</span>
+        </h4>
+        <p class="card-text"><strong>Matricule :</strong> {{ agent.police_number }}</p>
+        <p class="card-text"><strong>Grade :</strong> {{ agent.police_rank }}</p>
+    </div>
+</div>
+

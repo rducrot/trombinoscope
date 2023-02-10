@@ -1,0 +1,12 @@
+{% load mptt_tags %}
+
+<ul class="list-groupe">
+    {% recursetree services %}
+        <li class="list-group-item">
+            <a href="{% url 'service' node.id %}">{{ node.name }}</a>
+        </li>
+        {% if node.children %}
+            {%include 'app/partials/service_list_snippet.html' with services=node.children.all %}
+        {% endif %}
+    {% endrecursetree %}
+</ul>
