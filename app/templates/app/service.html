@@ -2,11 +2,15 @@
 {% load mptt_tags %}
 
 {% block content %}
-    <h2>Trombinoscope</h2>
-    <a href="{% url 'home' %}" class="btn btn-primary m-3">< Retour à la liste des services</a>
-{% if service.parent %}
-    <a href="{% url 'service' service.parent.id %}" class="btn btn-primary m-3"> < Service parent : {{ service.parent.name }}</a>
-{% endif %}
-    <h3 class="text-primary text-white bg-primary p-2 mb-3">{{ service.name }}</h3>
+<div class="col col-sm-6 mx-auto">
+    <h2 class="w-100 text-center mt-3">Trombinoscope</h2>
+    <div class="d-flex justify-content-center">
+        <a href="{% url 'home' %}" class="btn btn-primary m-3">< Retour à la liste des services</a>
+        {% if service.parent %}
+            <a href="{% url 'service' service.parent.id %}" class="btn btn-primary m-3"> < Service parent : {{ service.parent.name }}</a>
+        {% endif %}
+    </div>
+</div>
+<h3 class="text-primary text-white bg-primary p-2 mb-3">{{ service.name }}</h3>
 {% include 'app/partials/service_detail_snippet.html' %}
 {% endblock %}
