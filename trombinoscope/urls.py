@@ -16,13 +16,17 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import path
 
 import app.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', app.views.home, name='home'),
+    path('', LoginView.as_view(template_name='authentication/login.html',
+                               redirect_authenticated_user=True, ), name='login'),
+    path('logout/', LogoutView.as_view(), name='logout'),
+    path('home/', app.views.home, name='home'),
     path('service/<int:service_id>/', app.views.service, name='service')
 ]
 if settings.DEBUG:
