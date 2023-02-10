@@ -11,12 +11,6 @@ class Service(MPTTModel):
     def __str__(self):
         return f"{self.name}"
 
-    def __gt__(self, other):
-        return self.name > other.name
-
-    def __lt__(self, other):
-        return self.name < other.name
-
     class MPTTMeta:
         order_insertion_by = ['name']
 
@@ -27,7 +21,15 @@ class Agent(models.Model):
     police_number = models.IntegerField(verbose_name="Matricule")
     police_rank = models.CharField(max_length=64, verbose_name="Grade")
     image = models.ImageField(null=True, blank=True)
+
+    class Role(models.TextChoices):
+        CHEF = 'Chef'
+        ADJOINT = 'Adjoint'
+        SECRETAIRE = 'Secrétaire'
+        AUTRE = 'Autre'
+
     service = models.ForeignKey(to=Service, on_delete=models.CASCADE, related_name="agents")
+    role = models.CharField(choices=Role.choices, default=Role.AUTRE, max_length=32, verbose_name="Rôle")
 
     def __str__(self):
         return f"{self.last_name} {self.first_name}"

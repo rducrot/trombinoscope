@@ -1,12 +1,22 @@
 {% load mptt_tags %}
 
-<ul class="list-groupe">
+<div class="accordion-item">
     {% recursetree services %}
-        <li class="list-group-item">
-            <a href="{% url 'service' node.id %}">{{ node.name }}</a>
-        </li>
+        <div class="accordion-header">
+            <button class="accordion-button {% if node.level != 0 %}collapsed{% endif %}"
+            type="button" data-bs-toggle="collapse" data-bs-target="#panel-{{ node.pk }}" aria-expanded="true"
+            aria-controls="panels-{{ node.pk }}">
+                {{ node.name }}
+            </button>
+        </div>
+    <div id="panel-{{ node.pk }}" class="accordion-collapse {% if node.level != 0 %}collapse{% endif %}"
+    aria-labelledby="panel-{{ node.pk }}">
+        <div class="accordion-body">
+            <a href="{% url 'service' node.id %}" class="btn btn-primary mb-3">Accéder au service</a>
         {% if node.children %}
             {%include 'app/partials/service_list_snippet.html' with services=node.children.all %}
         {% endif %}
     {% endrecursetree %}
-</ul>
+        </div>
+    </div>
+</div>
