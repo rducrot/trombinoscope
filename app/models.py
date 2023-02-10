@@ -8,11 +8,20 @@ class Service(MPTTModel):
     name = models.CharField(max_length=128)
     parent = TreeForeignKey("self", on_delete=models.CASCADE, null=True, blank=True, related_name="children")
 
-    def __str__(self):
-        return f"{self.name}"
-
     class MPTTMeta:
         order_insertion_by = ['name']
+
+    def get_parents(self):
+        parents = []
+        p = self.parent
+        while p:
+            parents.append(p)
+            p = p.parent
+        parents.reverse()
+        return parents
+
+    def __str__(self):
+        return f"{self.name}"
 
 
 class Agent(models.Model):

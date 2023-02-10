@@ -11,9 +11,7 @@
                 {% include 'app/partials/agent_list_snippet.html' %}
             {% endif %}
         {% endfor %}
-    </div>
-        <div class="row d-flex justify-content-evenly">
-        {% for agent in service.agents.all %}
+        {% for agent in service.agents.all|dictsort:"last_name" %}
             {% if agent.role == 'Autre' %}
                 {% include 'app/partials/agent_list_snippet.html' %}
             {% endif %}
@@ -23,9 +21,18 @@
 
 {% recursetree service.children.all %}
     {% if node.children %}
-        <h3 class="text-primary text-white bg-secondary p-2 mb-3">
-            <a href="{% url 'service' node.id %}" class="link-light">{{ node.name }}</a>
-        </h3>
+        <h4 class="bg-light bg-gradient p-2 mb-3">
+            <nav aria-label="breadcrumb">
+            <ol class="breadcrumb" style="--bs-breadcrumb-divider: '>';">
+            {% for parent in node.get_parents %}
+                <li class="breadcrumb-item">
+                    <a href="{% url 'service' parent.id %}"class="d-none d-md-inline">{{ parent.name }}</a>
+                </li>
+            {% endfor %}
+                <li class="breadcrumb-item"><a href="{% url 'service' node.id %}">{{ node.name }}</a></li>
+            </ol>
+            </nav>
+        </h4>
         {% include 'app/partials/service_detail_snippet.html' with service=node %}
     {% endif %}
 {% endrecursetree %}
