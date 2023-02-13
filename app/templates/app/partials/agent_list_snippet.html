@@ -1,13 +1,19 @@
+{% load static %}
+
 <div class="card mb-3 {% if agent.role != 'Autre' %}border-primary{% endif %}" style="max-width: 200px;">
     {% if agent.image %}
-    <img src="{{ agent.image.url }}" class="card-img-top">
+        <img src="{{ agent.image.url }}" class="card-img-top">
+    {% else %}
+        <img src="{% static 'images/default-picture.jpeg' %}" class="card-img-top">
     {% endif %}
     <div class="card-body">
         <h5 class="card-title">{{ agent.first_name }} <span
                 style="text-transform: uppercase;">{{ agent.last_name }}</span>
         </h5>
-        <p class="card-text"><strong>Matricule :</strong> {{ agent.police_number }}</p>
-        <p class="card-text"><strong>Grade :</strong> {{ agent.police_rank }}</p>
+        <h6 class="card-subtitle text-muted">Matricule</h6>
+        <p class="card-text">{%if agent.police_number %}{{ agent.police_number }}{% endif %}</p>
+        <h6 class="card-subtitle text-muted">Grade</h6>
+        <p class="card-text">{% if agent.police_rank %}{{ agent.police_rank }}{% endif %}</p>
     </div>
     {% if agent.role == 'Chef' %}
         <div class="card-footer text-primary">Chef de service</div>
@@ -17,4 +23,3 @@
         <div class="card-footer text-primary">Secrétariat</div>
     {% endif %}
 </div>
-

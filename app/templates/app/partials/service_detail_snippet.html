@@ -2,16 +2,22 @@
 
 <div class="container">
     <div class="row d-flex justify-content-evenly">
-        {% for agent in service.agents.all %}
+        {% for agent in service.agents.all|dictsort:"first_name"|dictsort:"last_name" %}
             {% if agent.role == 'Chef' %}
-                {% include 'app/partials/agent_list_snippet.html' %}
-            {% elif agent.role == 'Adjoint' %}
-                {% include 'app/partials/agent_list_snippet.html' %}
-            {% elif agent.role == 'Secrétaire' %}
                 {% include 'app/partials/agent_list_snippet.html' %}
             {% endif %}
         {% endfor %}
-        {% for agent in service.agents.all|dictsort:"last_name" %}
+        {% for agent in service.agents.all|dictsort:"first_name"|dictsort:"last_name" %}
+            {% if agent.role == 'Adjoint' %}
+                {% include 'app/partials/agent_list_snippet.html' %}
+            {% endif %}
+        {% endfor %}
+        {% for agent in service.agents.all|dictsort:"first_name"|dictsort:"last_name" %}
+            {% if agent.role == 'Secrétaire' %}
+                {% include 'app/partials/agent_list_snippet.html' %}
+            {% endif %}
+        {% endfor %}
+        {% for agent in service.agents.all|dictsort:"first_name"|dictsort:"last_name" %}
             {% if agent.role == 'Autre' %}
                 {% include 'app/partials/agent_list_snippet.html' %}
             {% endif %}

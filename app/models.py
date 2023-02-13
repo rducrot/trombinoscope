@@ -5,7 +5,7 @@ from PIL import Image
 
 
 class Service(MPTTModel):
-    name = models.CharField(max_length=128)
+    name = models.CharField(max_length=128, null=False, blank=False)
     parent = TreeForeignKey("self", on_delete=models.CASCADE, null=True, blank=True, related_name="children")
 
     class MPTTMeta:
@@ -25,11 +25,11 @@ class Service(MPTTModel):
 
 
 class Agent(models.Model):
-    first_name = models.CharField(max_length=64, verbose_name="Prénom")
-    last_name = models.CharField(max_length=64, verbose_name="Nom")
-    police_number = models.IntegerField(verbose_name="Matricule")
-    police_rank = models.CharField(max_length=64, verbose_name="Grade")
-    image = models.ImageField(null=True, blank=True)
+    first_name = models.CharField(max_length=64, blank=False, null=False, verbose_name="Prénom")
+    last_name = models.CharField(max_length=64, blank=False, null=False, verbose_name="Nom")
+    police_number = models.IntegerField(blank=True, null=True, unique=True, verbose_name="Matricule")
+    police_rank = models.CharField(max_length=64, blank=True, null=False, verbose_name="Grade")
+    image = models.ImageField(blank=True, null=True)
 
     class Role(models.TextChoices):
         CHEF = 'Chef'
@@ -37,8 +37,9 @@ class Agent(models.Model):
         SECRETAIRE = 'Secrétaire'
         AUTRE = 'Autre'
 
-    service = models.ForeignKey(to=Service, on_delete=models.CASCADE, related_name="agents")
-    role = models.CharField(choices=Role.choices, default=Role.AUTRE, max_length=32, verbose_name="Rôle")
+    service = models.ForeignKey(to=Service, on_delete=models.CASCADE, blank=False, null=False, related_name="agents")
+    role = models.CharField(choices=Role.choices, default=Role.AUTRE, blank=False, null=False,
+                            max_length=32, verbose_name="Rôle")
 
     def __str__(self):
         return f"{self.last_name} {self.first_name}"

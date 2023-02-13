@@ -9,7 +9,7 @@ class ServiceAdmin(admin.ModelAdmin):
 
 
 class AgentAdmin(admin.ModelAdmin):
-    list_display = ('first_name', 'last_name', 'police_number', 'police_rank', 'service')
+    list_display = ('first_name', 'last_name', 'police_number', 'police_rank', 'service', 'role')
 
 
 admin.site.register(Service, ServiceAdmin)

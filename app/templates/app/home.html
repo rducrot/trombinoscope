@@ -3,8 +3,14 @@
 {% block content %}
 <div class="col col-sm-6 mx-auto">
     <h2 class="w-100 text-center mt-3 mb-3">Liste des services</h2>
-    <div class="accordion">
-        {% include 'app/partials/service_list_snippet.html'%}
-    </div>
+    {% if services %}
+        <div class="accordion">
+            {% include 'app/partials/service_list_snippet.html'%}
+        </div>
+    {% else %}
+        <p class="text-center">Aucun service à afficher.</p>
+        <p class="text-center">Veuillez commencer par créer un service.</p>
+{% endif %}
 </div>
+
 {% endblock %}
