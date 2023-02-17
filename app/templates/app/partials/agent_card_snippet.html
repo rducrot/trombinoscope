@@ -1,0 +1,39 @@
+{% load static %}
+
+<div class="card align-self-start m-2 {% if agent.role != 'Autre' %}border-primary{% endif %}"
+     style="max-width: 240px; min-height: 350px;">
+    <div class="card-header flex-fill">
+        {% if agent.image %}
+            <img src="{{ agent.image.url }}" class="card-img-top mb-1">
+        {% else %}
+            <img src="{% static 'images/default-picture.jpeg' %}" class="card-img-top mb-1">
+        {% endif %}
+            <h5 class="card-title">{{ agent.first_name }}
+                <span style="text-transform: uppercase;">{{ agent.last_name }}</span>
+        </h5>
+         <ul class="nav nav-pills card-header-pills">
+             <li class="nav-item">
+                <a class="nav-link active" data-bs-toggle="collapse" role="button"
+                   aria-expanded="false" aria-controls="collapseExample" aria-current="true"
+                   href="#info-{{ agent.pk }}">Informations</a>
+            </li>
+         </ul>
+    </div>
+    <div class="collapse" id="info-{{ agent.pk }}">
+        <div class="card-body">
+            <h6 class="card-subtitle text-muted">Matricule</h6>
+            <p class="card-text">{%if agent.police_number %}{{ agent.police_number }}{% endif %}</p>
+            <h6 class="card-subtitle text-muted">RIO</h6>
+            <p class="card-text">{% if agent.rio %}{{ agent.rio }}{% endif %}</p>
+            <h6 class="card-subtitle text-muted">Grade</h6>
+            <p class="card-text">{% if agent.police_rank %}{{ agent.police_rank }}{% endif %}</p>
+        </div>
+    </div>
+    {% if agent.role == 'Chef' %}
+        <div class="card-footer text-primary">Chef de service</div>
+    {% elif agent.role == 'Adjoint' %}
+        <div class="card-footer text-primary">Adjoint au chef de service</div>
+    {% elif agent.role == 'Secrétaire' %}
+        <div class="card-footer text-primary">Secrétariat</div>
+    {% endif %}
+</div>
