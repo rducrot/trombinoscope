@@ -11,6 +11,7 @@
             <h5 class="card-title">{{ agent.first_name }}
                 <span style="text-transform: uppercase;">{{ agent.last_name }}</span>
         </h5>
+        {% if agent.has_informations %}
          <ul class="nav nav-pills card-header-pills">
              <li class="nav-item">
                 <a class="nav-link active" data-bs-toggle="collapse" role="button"
@@ -18,7 +19,9 @@
                    href="#info-{{ agent.pk }}">Informations</a>
             </li>
          </ul>
+        {% endif %}
     </div>
+    {% if agent.has_informations %}
     <div class="collapse" id="info-{{ agent.pk }}">
         <div class="card-body">
             {% if agent.police_rank %}
@@ -39,6 +42,7 @@
             {% endif %}
         </div>
     </div>
+    {% endif %}
     {% if agent.role == 'Chef' %}
         <div class="card-footer text-primary">Chef de service</div>
     {% elif agent.role == 'Adjoint' %}

@@ -44,5 +44,22 @@ class Agent(models.Model):
     role = models.CharField(choices=Role.choices, default=Role.AUTRE, blank=False, null=False,
                             max_length=32, verbose_name="Rôle")
 
+    IMAGE_MAX_SIZE = (283, 377)
+
+    def resize_image(self):
+        image = Image.open(self.image)
+        image.thumbnail(self.IMAGE_MAX_SIZE)
+        image.save(self.image.path)
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        if self.image:
+            self.resize_image()
+
+    def has_informations(self):
+        if self.police_rank or self.police_number or self.phone or self.mobile:
+            return True
+        return False
+
     def __str__(self):
         return f"{self.last_name} {self.first_name}"
