@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'mptt',
     'widget_tweaks',
     'authentication',
+    "phonenumber_field",
     'app',
 ]
 

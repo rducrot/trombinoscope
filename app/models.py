@@ -2,6 +2,7 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from mptt.models import MPTTModel, TreeForeignKey
 from PIL import Image
+from phonenumber_field.modelfields import PhoneNumberField
 
 
 class Service(MPTTModel):
@@ -28,7 +29,8 @@ class Agent(models.Model):
     first_name = models.CharField(max_length=64, blank=False, null=False, verbose_name="Prénom")
     last_name = models.CharField(max_length=64, blank=False, null=False, verbose_name="Nom")
     police_number = models.IntegerField(blank=True, null=True, unique=True, verbose_name="Matricule")
-    rio = models.IntegerField(blank=True, null=True, unique=True, verbose_name="RIO")
+    phone = PhoneNumberField(null=True, blank=True, region="FR", verbose_name="Poste fixe")
+    mobile = PhoneNumberField(null=True, blank=True, region="FR", verbose_name="Mobile")
     police_rank = models.CharField(max_length=64, blank=True, null=False, verbose_name="Grade")
     image = models.ImageField(blank=True, null=True)
 

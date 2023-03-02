@@ -21,12 +21,22 @@
     </div>
     <div class="collapse" id="info-{{ agent.pk }}">
         <div class="card-body">
-            <h6 class="card-subtitle text-muted">Matricule</h6>
-            <p class="card-text">{%if agent.police_number %}{{ agent.police_number }}{% endif %}</p>
-            <h6 class="card-subtitle text-muted">RIO</h6>
-            <p class="card-text">{% if agent.rio %}{{ agent.rio }}{% endif %}</p>
-            <h6 class="card-subtitle text-muted">Grade</h6>
-            <p class="card-text">{% if agent.police_rank %}{{ agent.police_rank }}{% endif %}</p>
+            {% if agent.police_rank %}
+                <h6 class="card-subtitle text-muted">Grade</h6>
+                <p class="card-text">{{ agent.police_rank }}</p>
+            {% endif %}
+            {%if agent.police_number %}
+                <h6 class="card-subtitle text-muted">Matricule</h6>
+                <p class="card-text">{{ agent.police_number }}</p>
+            {% endif %}
+            {% if agent.phone %}
+                <h6 class="card-subtitle text-muted">Poste fixe</h6>
+                <p class="card-text">{{ agent.phone }}</p>
+            {% endif %}
+            {% if agent.mobile %}
+                <h6 class="card-subtitle text-muted">Mobile</h6>
+                <p class="card-text">{{ agent.mobile }}</p>
+            {% endif %}
         </div>
     </div>
     {% if agent.role == 'Chef' %}
