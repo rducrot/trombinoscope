@@ -17,12 +17,15 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.staticfiles.storage import staticfiles_storage
 from django.urls import path
+from django.views.generic.base import RedirectView
 
 import app.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('favicon.ico', RedirectView.as_view(url=staticfiles_storage.url('images/favicon.ico'))),
     path('', LoginView.as_view(template_name='authentication/login.html',
                                redirect_authenticated_user=True, ), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),

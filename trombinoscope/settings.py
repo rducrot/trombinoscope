@@ -12,6 +12,16 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 
+import environ
+
+env = environ.Env(
+    # set casting, default value
+    DEBUG=(bool, False)
+)
+
+# reading .env file
+environ.Env.read_env()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,12 +30,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-4vyj23fud2g5_c%ftf%!_$s-*+(6%$k9t_pk6&=k8x27^td(+#'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = env('ALLOWED_HOSTS').split(' ')
 
 
 # Application definition
@@ -39,9 +49,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_cleanup.apps.CleanupConfig',
     'mptt',
+    'phonenumber_field',
     'widget_tweaks',
     'authentication',
-    "phonenumber_field",
     'app',
 ]
 
@@ -123,8 +133,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
+if DEBUG:
+    STATICFILES_DIRS = [BASE_DIR.joinpath('static/')]
+else:
+    STATIC_ROOT = BASE_DIR.joinpath('static/')
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [BASE_DIR.joinpath('static/')]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
