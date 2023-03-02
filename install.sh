@@ -24,6 +24,9 @@ echo "Fichier trombinoscope/.env créé avec succès."
 echo "Migration de la base de données."
 python3 manage.py migrate
 
+# Import des fichiers statiques
+python3 manage.py collectstatic --no-input
+
 # Création du super utilisateur
 echo "Création du super utilisateur."
 python3 manage.py createsuperuser

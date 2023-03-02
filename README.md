@@ -35,6 +35,10 @@ On commence par installer les dépendances :
 sudo apt-get update
 sudo apt-get install apache2 apache2-dev libapache2-mod-wsgi-py3
 ```
+On attribue les droits d'accès à l'application à Apache2 :
+```bash
+chown -R www-data:www-data /var/www/trombinoscope
+```
 ### Configuration dans `/etc/apache2/`
 #### Exemple de fichier `sites-available/trombinoscope.conf`
 ```text

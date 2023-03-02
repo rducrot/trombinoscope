@@ -24,13 +24,13 @@
     {% if agent.has_informations %}
     <div class="collapse" id="info-{{ agent.pk }}">
         <div class="card-body">
-            {% if agent.police_rank %}
+            {% if agent.grade %}
                 <h6 class="card-subtitle text-muted">Grade</h6>
-                <p class="card-text">{{ agent.police_rank }}</p>
+                <p class="card-text">{{ agent.grade }}</p>
             {% endif %}
-            {%if agent.police_number %}
+            {%if agent.registration_number %}
                 <h6 class="card-subtitle text-muted">Matricule</h6>
-                <p class="card-text">{{ agent.police_number }}</p>
+                <p class="card-text">{{ agent.registration_number }}</p>
             {% endif %}
             {% if agent.phone %}
                 <h6 class="card-subtitle text-muted">Poste fixe</h6>

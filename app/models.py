@@ -1,4 +1,3 @@
-from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from mptt.models import MPTTModel, TreeForeignKey
 from PIL import Image
@@ -28,11 +27,11 @@ class Service(MPTTModel):
 class Agent(models.Model):
     first_name = models.CharField(max_length=64, blank=False, null=False, verbose_name="Prénom")
     last_name = models.CharField(max_length=64, blank=False, null=False, verbose_name="Nom")
-    police_number = models.IntegerField(blank=True, null=True, unique=True, verbose_name="Matricule")
+    image = models.ImageField(blank=True, null=True)
+    grade = models.CharField(max_length=64, blank=True, null=False, verbose_name="Grade")
+    registration_number = models.IntegerField(blank=True, null=True, unique=True, verbose_name="Matricule")
     phone = PhoneNumberField(null=True, blank=True, region="FR", verbose_name="Poste fixe")
     mobile = PhoneNumberField(null=True, blank=True, region="FR", verbose_name="Mobile")
-    police_rank = models.CharField(max_length=64, blank=True, null=False, verbose_name="Grade")
-    image = models.ImageField(blank=True, null=True)
 
     class Role(models.TextChoices):
         CHEF = 'Chef'
@@ -57,7 +56,7 @@ class Agent(models.Model):
             self.resize_image()
 
     def has_informations(self):
-        if self.police_rank or self.police_number or self.phone or self.mobile:
+        if self.grade or self.registration_number or self.phone or self.mobile:
             return True
         return False
 
