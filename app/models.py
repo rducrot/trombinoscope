@@ -44,13 +44,13 @@ class Agent(models.Model):
     mobile = PhoneNumberField(null=True, blank=True, region="FR", verbose_name="Mobile")
 
     class Role(models.TextChoices):
-        CHIEF = 'Chef'
-        CHIEF_ASSISTANT = 'Adjoint'
-        SECRETARY = 'Secrétaire'
-        OTHER = 'Autre'
+        CHEF = 'Chef'
+        ADJOINT = 'Adjoint'
+        SECRETAIRE = 'Secrétaire'
+        AUTRE = 'Autre'
 
     service = models.ForeignKey(to=Service, on_delete=models.CASCADE, blank=False, null=False, related_name="agents")
-    role = models.CharField(choices=Role.choices, default=Role.OTHER, blank=False, null=False,
+    role = models.CharField(choices=Role.choices, default=Role.AUTRE, blank=False, null=False,
                             max_length=32, verbose_name="Rôle")
 
     IMAGE_MAX_SIZE = (283, 377)

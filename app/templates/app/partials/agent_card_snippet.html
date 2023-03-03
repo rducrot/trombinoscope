@@ -8,9 +8,7 @@
         {% else %}
             <img src="{% static 'images/default-picture.jpeg' %}" class="card-img-top mb-1">
         {% endif %}
-            <h5 class="card-title">{{ agent.first_name }}
-                <span style="text-transform: uppercase;">{{ agent.last_name }}</span>
-        </h5>
+            <h5 class="card-title">{{ agent.first_name }} {{ agent.last_name }}</h5>
         {% if agent.has_informations %}
          <ul class="nav nav-pills card-header-pills">
              <li class="nav-item">

@@ -30,7 +30,8 @@ urlpatterns = [
                                redirect_authenticated_user=True, ), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
     path('home/', app.views.home, name='home'),
-    path('service/<int:service_id>/', app.views.service, name='service')
+    path('service/<int:service_id>/', app.views.service, name='service'),
+    path('annuaire', app.views.annuaire, name='annuaire'),
 ]
 if settings.DEBUG:
     urlpatterns += static(

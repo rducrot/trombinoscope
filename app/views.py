@@ -9,7 +9,6 @@ def home(request):
     services = Service.objects.all()
     context = {
         'services': services,
-        'shown_services': [],
     }
     return render(request, 'app/home.html', context=context)
 
@@ -21,3 +20,12 @@ def service(request, service_id):
         'service': service_,
     }
     return render(request, 'app/service.html', context=context)
+
+
+@login_required
+def annuaire(request):
+    services = Service.objects.all()
+    context = {
+        'services': services,
+    }
+    return render(request, 'app/annuaire.html', context=context)
