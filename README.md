@@ -92,3 +92,10 @@ python3 manage.py runserver
 L'application est disponible par défaut à l'adresse http://127.0.0.1:8000.
 
 Le super utilisateur peut gérer les services et les agents à l'adresse http://127.0.0.1:8000/admin.
+## Mise à jour
+Depuis le répertoire de l'application :
+```shell
+git pull
+python3 manage.py migrate
+chown -R www-data:www-data .
+```

@@ -5,6 +5,9 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 
 class Service(MPTTModel):
+    """"
+    Service Model. Services are organized in a tree structure.
+    """
     name = models.CharField(max_length=128, null=False, blank=False)
     parent = TreeForeignKey("self", on_delete=models.CASCADE, null=True, blank=True, related_name="children")
 
@@ -12,6 +15,9 @@ class Service(MPTTModel):
         order_insertion_by = ['name']
 
     def get_parents(self):
+        """
+        Return a list of parent services starting with the root service.
+        """
         parents = []
         p = self.parent
         while p:
@@ -25,6 +31,10 @@ class Service(MPTTModel):
 
 
 class Agent(models.Model):
+    """
+    Agent Model.
+    Required attributes are first_name, last_name, service and role (default=other)
+    """
     first_name = models.CharField(max_length=64, blank=False, null=False, verbose_name="Prénom")
     last_name = models.CharField(max_length=64, blank=False, null=False, verbose_name="Nom")
     image = models.ImageField(blank=True, null=True)
@@ -34,13 +44,13 @@ class Agent(models.Model):
     mobile = PhoneNumberField(null=True, blank=True, region="FR", verbose_name="Mobile")
 
     class Role(models.TextChoices):
-        CHEF = 'Chef'
-        ADJOINT = 'Adjoint'
-        SECRETAIRE = 'Secrétaire'
-        AUTRE = 'Autre'
+        CHIEF = 'Chef'
+        CHIEF_ASSISTANT = 'Adjoint'
+        SECRETARY = 'Secrétaire'
+        OTHER = 'Autre'
 
     service = models.ForeignKey(to=Service, on_delete=models.CASCADE, blank=False, null=False, related_name="agents")
-    role = models.CharField(choices=Role.choices, default=Role.AUTRE, blank=False, null=False,
+    role = models.CharField(choices=Role.choices, default=Role.OTHER, blank=False, null=False,
                             max_length=32, verbose_name="Rôle")
 
     IMAGE_MAX_SIZE = (283, 377)
@@ -56,6 +66,9 @@ class Agent(models.Model):
             self.resize_image()
 
     def has_informations(self):
+        """
+        Return True if there is facultative information.
+        """
         if self.grade or self.registration_number or self.phone or self.mobile:
             return True
         return False
