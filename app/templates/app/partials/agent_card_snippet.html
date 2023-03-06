@@ -24,19 +24,23 @@
         <div class="card-body">
             {% if agent.grade %}
                 <h6 class="card-subtitle text-muted">Grade</h6>
-                <p class="card-text">{{ agent.grade }}</p>
+                <p class="card-text bg-light border">{{ agent.grade }}</p>
             {% endif %}
             {%if agent.registration_number %}
                 <h6 class="card-subtitle text-muted">Matricule</h6>
-                <p class="card-text">{{ agent.registration_number }}</p>
+                <p class="card-text bg-light border">{{ agent.registration_number }}</p>
+            {% endif %}
+            {%if agent.mail %}
+                <h6 class="card-subtitle text-muted">Mail</h6>
+                <p class="card-text bg-light border">{{ agent.mail }}</p>
             {% endif %}
             {% if agent.phone %}
                 <h6 class="card-subtitle text-muted">Poste fixe</h6>
-                <p class="card-text">{{ agent.phone }}</p>
+                <p class="card-text bg-light border">{{ agent.phone }}</p>
             {% endif %}
             {% if agent.mobile %}
                 <h6 class="card-subtitle text-muted">Mobile</h6>
-                <p class="card-text">{{ agent.mobile }}</p>
+                <p class="card-text bg-light border">{{ agent.mobile }}</p>
             {% endif %}
         </div>
     </div>

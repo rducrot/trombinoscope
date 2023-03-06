@@ -31,7 +31,7 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(), name='logout'),
     path('home/', app.views.home, name='home'),
     path('service/<int:service_id>/', app.views.service, name='service'),
-    path('annuaire', app.views.annuaire, name='annuaire'),
+    path('annuaire', app.views.phone_book, name='annuaire'),
 ]
 if settings.DEBUG:
     urlpatterns += static(

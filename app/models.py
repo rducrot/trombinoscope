@@ -40,6 +40,7 @@ class Agent(models.Model):
     image = models.ImageField(blank=True, null=True)
     grade = models.CharField(max_length=64, blank=True, null=False, verbose_name="Grade")
     registration_number = models.IntegerField(blank=True, null=True, unique=True, verbose_name="Matricule")
+    mail = models.EmailField(null=True, blank=True, verbose_name="Adresse mail")
     phone = PhoneNumberField(null=True, blank=True, region="FR", verbose_name="Poste fixe")
     mobile = PhoneNumberField(null=True, blank=True, region="FR", verbose_name="Mobile")
 
@@ -69,7 +70,7 @@ class Agent(models.Model):
         """
         Return True if there is facultative information.
         """
-        if self.grade or self.registration_number or self.phone or self.mobile:
+        if self.grade or self.registration_number or self.mail or self.phone or self.mobile:
             return True
         return False
 

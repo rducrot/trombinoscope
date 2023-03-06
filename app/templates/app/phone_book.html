@@ -7,55 +7,36 @@
     <table class="table table-hover">
         {% for service in services %}
         <tr>
-            <th colspan="4" class="table-primary">{{ service.name }}</th>
+            <th colspan="5" class="table-primary">{{ service.name }}</th>
         </tr>
         <tr>
             <th>Nom</th>
             <th>Prénom</th>
+            <th>📧 Mail</th>
             <th>☎ Fixe</th>
             <th>📱 Mobile</th>
         </tr>
         {% for agent in service.agents.all|dictsort:"first_name"|dictsort:"last_name" %}
             {% if agent.role == 'Chef' %}
-        <tr>
-            <td>{{ agent.last_name }}</td>
-            <td>{{ agent.first_name }}</td>
-            <td>{% if agent.phone %}{{ agent.phone }}{% endif %}</td>
-            <td>{% if agent.mobile %}{{ agent.mobile }}{% endif %}</td>
-        </tr>
+                {% include 'app/partials/phone_book_line_snippet.html' %}
             {% endif %}
         {% endfor %}
 
         {% for agent in service.agents.all|dictsort:"first_name"|dictsort:"last_name" %}
             {% if agent.role == 'Adjoint' %}
-        <tr>
-            <td>{{ agent.last_name }}</td>
-            <td>{{ agent.first_name }}</td>
-            <td>{% if agent.phone %}{{ agent.phone }}{% endif %}</td>
-            <td>{% if agent.mobile %}{{ agent.mobile }}{% endif %}</td>
-        </tr>
+                {% include 'app/partials/phone_book_line_snippet.html' %}
             {% endif %}
         {% endfor %}
 
         {% for agent in service.agents.all|dictsort:"first_name"|dictsort:"last_name" %}
             {% if agent.role == 'Secrétaire' %}
-        <tr>
-            <td>{{ agent.last_name }}</td>
-            <td>{{ agent.first_name }}</td>
-            <td>{% if agent.phone %}{{ agent.phone }}{% endif %}</td>
-            <td>{% if agent.mobile %}{{ agent.mobile }}{% endif %}</td>
-        </tr>
+                {% include 'app/partials/phone_book_line_snippet.html' %}
             {% endif %}
         {% endfor %}
 
         {% for agent in service.agents.all|dictsort:"first_name"|dictsort:"last_name" %}
             {% if agent.role == 'Autre' %}
-        <tr>
-            <td>{{ agent.last_name }}</td>
-            <td>{{ agent.first_name }}</td>
-            <td>{% if agent.phone %}{{ agent.phone }}{% endif %}</td>
-            <td>{% if agent.mobile %}{{ agent.mobile }}{% endif %}</td>
-        </tr>
+                {% include 'app/partials/phone_book_line_snippet.html' %}
             {% endif %}
         {% endfor %}
 

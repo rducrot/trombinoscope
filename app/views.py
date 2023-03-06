@@ -23,9 +23,9 @@ def service(request, service_id):
 
 
 @login_required
-def annuaire(request):
+def phone_book(request):
     services = Service.objects.all()
     context = {
         'services': services,
     }
-    return render(request, 'app/annuaire.html', context=context)
+    return render(request, 'app/phone_book.html', context=context)

@@ -98,4 +98,5 @@ Depuis le répertoire de l'application :
 git pull
 python3 manage.py migrate
 chown -R www-data:www-data .
+systemctl restart apache2.service
 ```
