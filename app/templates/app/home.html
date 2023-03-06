@@ -11,7 +11,9 @@
         </div>
     {% else %}
         <p class="text-center">Aucun service à afficher.</p>
-        <p class="text-center">Veuillez commencer par créer un service.</p>
+    <p class="text-center">Veuillez commencer par
+        <a href="{% url 'admin:index' %}" target="_blank">créer un service.</a>
+    </p>
 {% endif %}
 </div>
 

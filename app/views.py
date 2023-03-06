@@ -22,7 +22,6 @@ def service(request, service_id):
     return render(request, 'app/service.html', context=context)
 
 
-@login_required
 def phone_book(request):
     services = Service.objects.all()
     context = {
