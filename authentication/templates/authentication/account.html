@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block nav-home %}active{% endblock nav-home %}
+
+{% block content %}
+<div class="col col-sm-6 mx-auto">
+    <h2 class="w-100 text-center mt-3 mb-3">Mon compte</h2>
+    <h3 class="mb-3">Informations</h3>
+    <table class="table">
+        <tr>
+            <th>Compte</th>
+            <td class="text-muted">{{ user.username }}</td>
+        </tr>
+        <tr>
+            <th>Nom</th>
+            <td class="text-muted">{{ user.last_name }}</td>
+        </tr>
+        <tr>
+            <th>Prénom</th>
+            <td class="text-muted">{{ user.first_name }}</td>
+        </tr>
+    </table>
+    <h3 class="mb-3">Mot de passe</h3>
+    <a class="btn btn-primary" href="{% url 'password_change' %}">Changer</a>
+</div>
+
+{% endblock content %}
