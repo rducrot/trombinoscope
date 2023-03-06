@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 {% load mptt_tags %}
 
+{% block nav-phone-book %}active{% endblock nav-phone-book %}
+
 {% block content %}
-<div class="col col-sm-6 mx-auto">
+<div class="col col-lg-7 mx-auto">
     <h2 class="w-100 text-center mt-3">Annuaire</h2>
     <table class="table table-hover">
         {% for service in services %}
