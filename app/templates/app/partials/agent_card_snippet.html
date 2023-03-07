@@ -8,63 +8,52 @@
         {% else %}
             <img src="{% static 'images/default-picture.jpeg' %}" class="card-img-top mb-1">
         {% endif %}
-            <h5 class="card-title">{{ agent.first_name }} {{ agent.last_name }}</h5>
-        {% if agent.has_informations %}
-         <ul class="nav nav-pills card-header-pills">
-             <li class="nav-item">
-                <a class="nav-link active" data-bs-toggle="collapse" role="button"
+        <div class="row">
+            <h4 class="card-title col-10 align-self-center">{{ agent.first_name }} {{ agent.last_name }}</h4>
+            {% if agent.has_informations %}
+                <a class="btn btn-primary col-2" data-bs-toggle="collapse" role="button"
                    aria-expanded="false" aria-controls="collapseExample" aria-current="true"
-                   href="#info-{{ agent.pk }}">Informations</a>
-            </li>
-         </ul>
-        {% endif %}
+                   href="#info-{{ agent.pk }}"><i class="bi bi-chevron-double-down"></i>
+                </a>
+            {% endif %}
+        </div>
     </div>
     {% if agent.has_informations %}
     <div class="collapse" id="info-{{ agent.pk }}">
         <div class="card-body">
             {% if agent.grade %}
-                <h6 class="card-subtitle text-muted">Grade</h6>
+                <h5 class="card-subtitle text-muted mb-1">Grade</h5>
                 <div class="row">
                     <p class="card-text bg-light border col-10">{{ agent.grade }}</p>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-files col-2" viewBox="0 0 16 16">
-                        <path d="M13 0H6a2 2 0 0 0-2 2 2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2 2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm0 13V4a2 2 0 0 0-2-2H5a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1zM3 4a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4z"/>
-                    </svg>
+                    <i class="bi bi-files col-2" title="Copier" role="button"></i>
                 </div>
             {% endif %}
             {%if agent.registration_number %}
-            <h6 class="card-subtitle text-muted">Matricule</h6>
+            <h5 class="card-subtitle text-muted mb-1">Matricule</h5>
             <div class="row">
                 <p class="card-text bg-light border col-10">{{ agent.registration_number }}</p>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-files col-2" viewBox="0 0 16 16">
-                    <path d="M13 0H6a2 2 0 0 0-2 2 2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2 2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm0 13V4a2 2 0 0 0-2-2H5a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1zM3 4a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4z"/>
-                </svg>
+                <i class="bi bi-files col-2" title="Copier" role="button"></i>
             </div>
             {% endif %}
             {%if agent.mail %}
-            <h6 class="card-subtitle text-muted">Mail</h6>
+            <h5 class="card-subtitle text-muted mb-1">Mail</h5>
             <div class="row">
                 <p class="card-text bg-light border col-10">{{ agent.mail }}</p>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-files col-2" viewBox="0 0 16 16">
-                    <path d="M13 0H6a2 2 0 0 0-2 2 2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2 2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm0 13V4a2 2 0 0 0-2-2H5a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1zM3 4a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4z"/>
-                </svg>
+                <i class="bi bi-files col-2" title="Copier" role="button"></i>
             </div>
             {% endif %}
             {% if agent.phone %}
-            <h6 class="card-subtitle text-muted">Poste fixe</h6>
+            <h5 class="card-subtitle text-muted mb-1">Poste fixe</h5>
             <div class="row">
                 <p class="card-text bg-light border col-10">{{ agent.phone }}</p>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-files col-2" viewBox="0 0 16 16">
-                    <path d="M13 0H6a2 2 0 0 0-2 2 2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2 2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm0 13V4a2 2 0 0 0-2-2H5a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1zM3 4a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4z"/>
-                </svg>
+                <i class="bi bi-files col-2" title="Copier" role="button"></i>
             </div>
             {% endif %}
             {% if agent.mobile %}
-            <h6 class="card-subtitle text-muted">Mobile</h6>
+            <h5 class="card-subtitle text-muted mb-1">Mobile</h5>
             <div class="row">
                 <p class="card-text bg-light border col-10">{{ agent.mobile }}</p>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-files col-2" viewBox="0 0 16 16">
-                    <path d="M13 0H6a2 2 0 0 0-2 2 2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2 2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm0 13V4a2 2 0 0 0-2-2H5a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1zM3 4a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4z"/>
-                </svg>
+                <i class="bi bi-files col-2" title="Copier" role="button"></i>
             </div>
             {% endif %}
         </div>

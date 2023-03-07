@@ -3,9 +3,9 @@
 {% block nav-home %}active{% endblock nav-home %}
 
 {% block content %}
-<div class="col col-sm-6 mx-auto">
-    <h2 class="w-100 text-center mt-3 mb-3">Mon compte</h2>
-    <h3 class="mb-3">Informations</h3>
+<div class="col col-md-6 mx-auto">
+    <h1 class="w-100 text-center mt-4 mb-3">Mon compte</h1>
+    <h2 class="mb-3">Informations</h2>
     <table class="table">
         <tr>
             <th>Compte</th>
@@ -20,8 +20,8 @@
             <td class="text-muted">{{ user.first_name }}</td>
         </tr>
     </table>
-    <h3 class="mb-3">Mot de passe</h3>
-    <a class="btn btn-primary" href="{% url 'password_change' %}">Changer</a>
+    <h2 class="mb-3">Mot de passe</h2>
+    <a class="btn btn-success" href="{% url 'password_change' %}">Changer de mot de passe</a>
 </div>
 
 {% endblock content %}

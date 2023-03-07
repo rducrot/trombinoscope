@@ -5,29 +5,28 @@
 
 {% block content %}
 <div class="col col-lg-7 mx-auto">
-    <h2 class="w-100 text-center mt-3">Annuaire</h2>
+    <h1 class="w-100 text-center mt-4 mb-3">Annuaire</h1>
     <table class="table table-hover">
+        <thead class="table-light sticky">
+            <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th><i class="bi bi-envelope-at"></i> Mail</th>
+                <th><i class="bi bi-telephone"></i> Fixe</th>
+                <th><i class="bi bi-phone"></i> Mobile</th>
+            </tr>
+        </thead>
         {% for service in services %}
         <tr>
             <th colspan="{% if user.is_authenticated %}4{% else %}5{% endif %}"
                 class="table-primary" id="service-{{ service.id }}">{{ service.name }}</th>
             {% if user.is_authenticated %}
             <th class="table-primary text-end" title="Trombinoscope {{service.name}}">
-                <a class="btn btn-primary" href="{% url 'service' service.id %}">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-person" viewBox="0 0 16 16">
-                        <path d="M12 1a1 1 0 0 1 1 1v10.755S12 11 8 11s-5 1.755-5 1.755V2a1 1 0 0 1 1-1h8zM4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4z"/>
-                        <path d="M8 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                    </svg>
+                <a class="btn btn-outline-primary" href="{% url 'service' service.id %}">
+                    <i class="bi bi-file-person"></i>
                 </a>
             </th>
             {% endif %}
-        </tr>
-        <tr>
-            <th>Nom</th>
-            <th>Prénom</th>
-            <th>📧 Mail</th>
-            <th>☎ Fixe</th>
-            <th>📱 Mobile</th>
         </tr>
         {% for agent in service.agents.all|dictsort:"first_name"|dictsort:"last_name" %}
             {% if agent.role == 'Chef' %}
@@ -52,8 +51,16 @@
                 {% include 'app/partials/phone_book_line_snippet.html' %}
             {% endif %}
         {% endfor %}
-
         {% endfor %}
+        <tfoot class="table-light sticky">
+            <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th><i class="bi bi-envelope-at"></i> Mail</th>
+                <th><i class="bi bi-telephone"></i> Fixe</th>
+                <th><i class="bi bi-phone"></i> Mobile</th>
+            </tr>
+        </tfoot>
     </table>
 </div>
 {% endblock %}
