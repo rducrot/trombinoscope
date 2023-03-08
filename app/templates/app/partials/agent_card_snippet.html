@@ -8,7 +8,7 @@
         {% else %}
             <img src="{% static 'images/default-picture.jpeg' %}" class="card-img-top mb-1">
         {% endif %}
-        <div class="row">
+        <div class="row  align-items-start">
             <h4 class="card-title col-10 align-self-center">{{ agent.first_name }} {{ agent.last_name }}</h4>
             {% if agent.has_informations %}
                 <a class="btn btn-primary col-2" data-bs-toggle="collapse" role="button"

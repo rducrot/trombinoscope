@@ -3,4 +3,6 @@
 **/__pycache__
 db.sqlite3
 media/*
+scripts/services.csv
+scripts/agents.csv
 venv
