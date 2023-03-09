@@ -9,6 +9,10 @@ class Service(MPTTModel):
     Service Model. Services are organized in a tree structure.
     """
     name = models.CharField(max_length=128, null=False, blank=False)
+    acronym = models.CharField(max_length=32, blank=True, verbose_name="Acronyme")
+    phone = PhoneNumberField(null=True, blank=True, region="FR", verbose_name="Poste secrétariat")
+    mail = models.EmailField(null=True, blank=True, verbose_name="Adresse mail fonctionnelle")
+    
     parent = TreeForeignKey("self", on_delete=models.CASCADE, null=True, blank=True, related_name="children")
 
     class MPTTMeta:

@@ -27,6 +27,15 @@ def create_services():
                 service = Service(pk=int(row["pk"]),
                                   name=row["name"])
 
+            if row["acronym"]:
+                service.acronym = row["acronym"]
+
+            if row["mail"]:
+                service.mail = row["mail"]
+
+            if row["phone"]:
+                service.phone = row["phone"]
+
             service.save()
 
 
