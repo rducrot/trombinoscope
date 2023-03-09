@@ -33,6 +33,15 @@ def create_agents():
                               registration_number=row["registration_number"],
                               service=Service.objects.get(pk=int(row["service_pk"])))
 
+            if row["mail"]:
+                agent.mail = row["mail"]
+
+            if row["phone"]:
+                agent.phone = row["phone"]
+
+            if row["mobile"]:
+                agent.mobile = row["mobile"]
+
             agent.save()
 
 
