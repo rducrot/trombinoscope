@@ -19,6 +19,10 @@
             <th>Prénom</th>
             <td class="text-muted">{{ user.first_name }}</td>
         </tr>
+        <tr>
+            <th>Adresse mail</th>
+            <td class="text-muted">{{ user.email }}</td>
+        </tr>
     </table>
     <h2 class="mb-3">Mot de passe</h2>
     <a class="btn btn-success" href="{% url 'password_change' %}">Changer de mot de passe</a>

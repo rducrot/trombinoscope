@@ -42,7 +42,12 @@
                     </a>
                 </li>
             {% endfor %}
-                <li class="breadcrumb-item"><a href="{% url 'service' node.id %}">{{ node.name }}</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'service' node.id %}">
+                    {%if node.acronym %}
+                        {{ node.acronym }}
+                    {% else %}
+                        {{ node.name }}
+                    {% endif %}</a></li>
             </ol>
             </nav>
             <a href="{% url 'annuaire' %}#service-{{ node.id }}" class="btn btn-outline-primary m-3"

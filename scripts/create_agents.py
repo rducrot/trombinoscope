@@ -5,7 +5,8 @@ from app.models import Service, Agent
 
 def check_db():
     if Agent.objects.exists():
-        answer = input("Attention ! Une base de données existe déjà. Souhaitez-vous la remplacer ? [o/N]")
+        print("Attention ! Des agents sont déjà présents dans la base de données.")
+        answer = input("Souhaitez-vous remplacer les remplacer ? [o/N]")
         if answer not in ['o', 'O', 'oui', 'Oui', 'y', 'Y']:
             exit()
 

@@ -45,14 +45,14 @@
             {% if agent.phone %}
             <h5 class="card-subtitle text-muted mb-1">Poste fixe</h5>
             <div class="row">
-                <p class="card-text bg-light border col-10">{{ agent.phone }}</p>
+                <p class="card-text bg-light border col-10">{{ agent.phone.as_national }}</p>
                 <i class="bi bi-files col-2" title="Copier" role="button"></i>
             </div>
             {% endif %}
             {% if agent.mobile %}
             <h5 class="card-subtitle text-muted mb-1">Mobile</h5>
             <div class="row">
-                <p class="card-text bg-light border col-10">{{ agent.mobile }}</p>
+                <p class="card-text bg-light border col-10">{{ agent.mobile.as_national }}</p>
                 <i class="bi bi-files col-2" title="Copier" role="button"></i>
             </div>
             {% endif %}

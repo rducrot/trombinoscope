@@ -1,6 +1,6 @@
 import csv
 
-from app.models import Service
+from app.models import Service, Agent
 
 
 def check_db():
@@ -15,6 +15,7 @@ def create_services():
         reader = csv.DictReader(file, delimiter=";")
 
         Service.objects.all().delete()
+        Agent.objects.all().delete()
 
         for row in reader:
             print(row)

@@ -10,9 +10,9 @@ class Service(MPTTModel):
     """
     name = models.CharField(max_length=128, null=False, blank=False)
     acronym = models.CharField(max_length=32, blank=True, verbose_name="Acronyme")
-    phone = PhoneNumberField(null=True, blank=True, region="FR", verbose_name="Poste secrétariat")
     mail = models.EmailField(null=True, blank=True, verbose_name="Adresse mail fonctionnelle")
-    
+    phone = PhoneNumberField(null=True, blank=True, region="FR", verbose_name="Poste standard")
+
     parent = TreeForeignKey("self", on_delete=models.CASCADE, null=True, blank=True, related_name="children")
 
     class MPTTMeta:
@@ -54,7 +54,7 @@ class Agent(models.Model):
         SECRETAIRE = 'Secrétaire'
         AUTRE = 'Autre'
 
-    service = models.ForeignKey(to=Service, on_delete=models.CASCADE, blank=False, null=False, related_name="agents")
+    service = TreeForeignKey(to=Service, on_delete=models.CASCADE, blank=False, null=False, related_name="agents")
     role = models.CharField(choices=Role.choices, default=Role.AUTRE, blank=False, null=False,
                             max_length=32, verbose_name="Rôle")
 
