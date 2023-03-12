@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="col col-sm-6 mx-auto">
+    <div class="d-flex align-items-center mt-5">
+        {% if agent.image %}
+            <img src="{{ agent.image.url }}" class="rounded float-start shadow"
+                 style="max-width: 200px;" alt="">
+        {% else %}
+            <img src="{% static 'images/default-picture.jpeg' %}" class="rounded float-start shadow"
+                 style="max-width: 200px;" alt="">
+        {% endif %}
+        <div class="ms-3">
+            <h1>{{ agent.first_name }} {{ agent.last_name }}</h1>
+            <p class="mb-1">{{ agent.service.name }}</p>
+            {% if agent.role == 'Chef' %}
+            <p class="text-primary mb-1">Chef de service</p>
+            {% elif agent.role == 'Adjoint' %}
+            <p class="text-primary mb-1">Adjoint au chef service</p>
+            {% elif agent.role == 'Secrétaire' %}
+            <p class="text-primary mb-1">Secrétariat</p>
+            {% endif %}
+            <div class="d-flex justify-content-center mt-2">
+                <a href="{% url 'service' agent.service.id %}" class="btn btn-primary me-3" title="Voir dans le trombinoscope">
+                    <i class="bi bi-file-person"></i> Trombinoscope
+                </a>
+                <a href="{% url 'annuaire' %}#service-{{ agent.service.id }}" class="btn btn-primary" title="Voir dans l'annuaire">
+                    <i class="bi bi-journal-text"></i> Annuaire
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+
+    <h2 class="mt-3 mb-3">Informations</h2>
+    <table class="table table-hover">
+        <tr>
+            <th>Grade</th>
+            <td>{% if agent.grade %}{{ agent.grade }}{% endif %}</td>
+        </tr>
+        <tr>
+            <th>Matricule</th>
+            <td>{% if agent.registration_number %}{{ agent.registration_number }}{% endif %}</td>
+        </tr>
+        <tr>
+            <th><i class="bi bi-envelope-at"></i> Mail</th>
+            <td>{% if agent.mail %}{{ agent.mail }}{% endif %}</td>
+        </tr>
+        <tr>
+            <th><i class="bi bi-telephone"></i> Poste fixe</th>
+            <td>{% if agent.phone %}{{ agent.phone.as_national }}{% endif %}</td>
+        </tr>
+        <tr>
+            <th><i class="bi bi-phone"></i> Mobile</th>
+            <td>{% if agent.mobile %}{{ agent.mobile.as_national }}{% endif %}</td>
+        </tr>
+    </table>
+    <h2 class="mt-3 mb-3">Service</h2>
+    <table class="table table-hover">
+        <tr>
+            <th>Service</th>
+            <td>{{ agent.service.name }}</td>
+        </tr>
+        <tr>
+            <th>Adresse</th>
+            <td>{{ agent.service.get_address }}</td>
+        </tr>
+        <tr>
+            <th><i class="bi bi-envelope-at"></i> Mail fonctionnel</th>
+            <td>{% if agent.service.mail %}{{ agent.service.mail }}{% endif %}</td>
+        </tr>
+        <tr>
+            <th><i class="bi bi-telephone"></i> Standard</th>
+            <td>{% if agent.service.phone %}{{ agent.service.phone.as_national }}{% endif %}</td>
+        </tr>
+    </table>
+</div>
+{% endblock content %}

@@ -37,6 +37,7 @@ urlpatterns = [
     path('account/', authentication.views.account, name='account'),
     path('home/', app.views.home, name='home'),
     path('service/<int:service_id>/', app.views.service, name='service'),
+    path('agent/<int:agent_id>/', app.views.agent, name='agent'),
     path('annuaire', app.views.phone_book, name='annuaire'),
 ]
 if settings.DEBUG:

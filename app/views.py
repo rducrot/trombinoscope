@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
-from app.models import Service
+from app.models import Service, Agent
 
 
 @login_required
@@ -20,6 +20,15 @@ def service(request, service_id):
         'service': service_,
     }
     return render(request, 'app/service.html', context=context)
+
+
+@login_required
+def agent(request, agent_id):
+    agent_ = Agent.objects.get(pk=agent_id)
+    context = {
+        'agent': agent_,
+    }
+    return render(request, 'app/agent.html', context=context)
 
 
 def phone_book(request):

@@ -4,12 +4,14 @@
      style="max-width: 240px; min-height: 350px;">
     <div class="card-header flex-fill">
         {% if agent.image %}
-            <img src="{{ agent.image.url }}" class="card-img-top mb-1">
+            <img src="{{ agent.image.url }}" class="card-img-top mb-1" alt="">
         {% else %}
-            <img src="{% static 'images/default-picture.jpeg' %}" class="card-img-top mb-1">
+            <img src="{% static 'images/default-picture.jpeg' %}" class="card-img-top mb-1" alt="">
         {% endif %}
         <div class="row  align-items-start">
-            <h4 class="card-title col-10 align-self-center">{{ agent.first_name }} {{ agent.last_name }}</h4>
+            <a href="{% url 'agent' agent.id %}" class="card-title col-10 align-self-center link-dark h4">
+                {{ agent.first_name }} {{ agent.last_name }}
+            </a>
             {% if agent.has_informations %}
                 <a class="btn btn-primary col-2" data-bs-toggle="collapse" role="button"
                    aria-expanded="false" aria-controls="collapseExample" aria-current="true"
@@ -22,35 +24,35 @@
     <div class="collapse" id="info-{{ agent.pk }}">
         <div class="card-body">
             {% if agent.grade %}
-                <h5 class="card-subtitle text-muted mb-1">Grade</h5>
+                <p class="card-subtitle text-muted mb-1">Grade</p>
                 <div class="row">
                     <p class="card-text bg-light border col-10">{{ agent.grade }}</p>
                     <i class="bi bi-files col-2" title="Copier" role="button"></i>
                 </div>
             {% endif %}
             {%if agent.registration_number %}
-            <h5 class="card-subtitle text-muted mb-1">Matricule</h5>
+            <p class="card-subtitle text-muted mb-1">Matricule</p>
             <div class="row">
                 <p class="card-text bg-light border col-10">{{ agent.registration_number }}</p>
                 <i class="bi bi-files col-2" title="Copier" role="button"></i>
             </div>
             {% endif %}
             {%if agent.mail %}
-            <h5 class="card-subtitle text-muted mb-1">Mail</h5>
+            <p class="card-subtitle text-muted mb-1"><i class="bi bi-envelope-at"></i> Mail</p>
             <div class="row">
                 <p class="card-text bg-light border col-10">{{ agent.mail }}</p>
                 <i class="bi bi-files col-2" title="Copier" role="button"></i>
             </div>
             {% endif %}
             {% if agent.phone %}
-            <h5 class="card-subtitle text-muted mb-1">Poste fixe</h5>
+            <p class="card-subtitle text-muted mb-1"><i class="bi bi-telephone"></i> Poste fixe</p>
             <div class="row">
                 <p class="card-text bg-light border col-10">{{ agent.phone.as_national }}</p>
                 <i class="bi bi-files col-2" title="Copier" role="button"></i>
             </div>
             {% endif %}
             {% if agent.mobile %}
-            <h5 class="card-subtitle text-muted mb-1">Mobile</h5>
+            <p class="card-subtitle text-muted mb-1"><i class="bi bi-phone"></i> Mobile</p>
             <div class="row">
                 <p class="card-text bg-light border col-10">{{ agent.mobile.as_national }}</p>
                 <i class="bi bi-files col-2" title="Copier" role="button"></i>
