@@ -27,6 +27,14 @@ Ce script met en place l'environnement virtuel, les dépendances, les variables 
 Les informations qui vous sont demandées sont :
 * L'adresse IP du serveur (modifiable dans le fichier `trombinoscope/.env`).
 * Les informations du super utilisateur.
+### Import d'une base de données existante
+Il est possible d'importer une liste de services et d'utilisateurs à partir de fichiers csv.
+1. Créer les fichiers `services.csv` et `agents.csv` dans le dossier `scripts/`. Voir les fichiers `sample_*.csv` du même dossier pour les entêtes. Voir les fichiers `create_services.py` et `create_agents.py` pour une documentation détaillée.
+2. Lancer les scripts suivants depuis l'environnement virtuel. A noter : si des services et des agents existent déjà dans la base de données, ceux-ci SERONT SUPPRIMES.
+```bash
+python3 manage.py runscript create_services
+python3 manage.py runscript create_agents
+```
 ## Mise en production
 Ci-dessous un exemple d'installation sur un serveur web Debian/Ubuntu avec Apache2 et l'application Trombinoscope installée dans `/var/www`.
 
@@ -96,7 +104,7 @@ Le super utilisateur peut gérer les services et les agents à l'adresse http://
 Depuis le répertoire de l'application :
 ```shell
 git pull
+source venv/bin/activate
 python3 manage.py migrate
-chown -R www-data:www-data .
 systemctl restart apache2.service
 ```
