@@ -13,7 +13,8 @@
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon-32x32.png' %}">
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon-16x16.png' %}">
 </head>
-<body class="d-flex flex-column h-100">
+<body class="d-flex flex-column h-100" data-bs-spy="scroll" data-bs-target="#phone-book-nav"
+     data-bs-offset="0" tabindex="0">
 <header class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow">
     <nav class="container-fluid">
         <a class="navbar-brand" href="{% url 'home' %}">Trombinoscope</a>

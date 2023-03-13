@@ -4,6 +4,33 @@
 {% block nav-phone-book %}active{% endblock nav-phone-book %}
 
 {% block content %}
+<div class="row">
+<div class=" col-2 navbar bg-light mx-1 border-end" style="height: 100%; position: fixed; overflow-y: scroll;" role="navigation">
+    <nav id="phone-book-nav" class="h-100 flex-column align-items-stretch pe-4" >
+        <nav class="nav nav-pills flex-column">
+            {% recursetree services %}
+                <a class="nav-link
+                {% if node.get_level == 0 %}
+                    h4 border-top fw-bold
+                {% elif node.get_level == 1 %}
+                    border-top border-bottom fw-bold
+                {% elif node.get_level == 2 %}
+                    py-0
+                {% elif 2 < node.get_level < 7 %}
+                    py-0 ms-{{ node.get_level|add:'-1' }}
+                {% elif node.get_level >= 7 %}
+                    py-0 ms-5
+                {% endif %}"
+                href="#service-{{ node.id }}">
+                    {% if node.acronym %}{{ node.acronym }}{% else %}{{ node.name }}{% endif %}
+                </a>
+            {% if not node.is_leaf_node %}
+                {{ children }}
+        {% endif %}
+        {% endrecursetree %}
+    </nav>
+</div>
+
 <div class="col col-lg-7 mx-auto">
     <h1 class="w-100 text-center mt-4 mb-3">Annuaire</h1>
     <table class="table table-hover table-sm">
@@ -17,7 +44,7 @@
             </tr>
         </thead>
         {% for service in services %}
-        <tr>
+        <tr style="	scroll-margin-top: 1em;">
             <th colspan="{% if user.is_authenticated %}4{% else %}5{% endif %}"
                 class="table-primary" id="service-{{ service.id }}">{{ service.name }}</th>
             {% if user.is_authenticated %}
@@ -74,5 +101,6 @@
             </tr>
         </tfoot>
     </table>
+    </div>
 </div>
 {% endblock %}
