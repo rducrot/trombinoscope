@@ -10,7 +10,8 @@ class Service(MPTTModel):
     """
     name = models.CharField(max_length=128, null=False, blank=False)
     acronym = models.CharField(max_length=32, blank=True, verbose_name="Acronyme")
-    address = models.CharField(max_length=256, blank=True, verbose_name="Adresse postale")
+    address = models.CharField(max_length=256, blank=True, verbose_name="Adresse postale",
+                               help_text="Laisser vide si l'adresse est identique au service parent.")
     mail = models.EmailField(null=True, blank=True, verbose_name="Mail fonctionnel")
     phone = PhoneNumberField(null=True, blank=True, region="FR", verbose_name="Poste standard")
 

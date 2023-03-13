@@ -1,3 +1,22 @@
+"""
+Ce script permet d'importer une liste de services dans la base de données à partir d'un fichier csv.
+Si des services et des agents sont déjà présents dans la bdd, CEUX-CI SERONT SUPPRIMES.
+
+Le fichier csv doit être placé dans le même dossier que ce script et être nommé "services.csv". Les entêtes doivent être
+présents (voir l'exemple "sample_services.csv").
+
+Entêtes CSV :
+- pk (int, requis) : Identifiant du service. Numéroter à partir de 0. Cet identifiant est à renseigner comme service_pk
+pour les agents (voir "create_agents.py").
+- name (str, requis) : Nom du service.
+- parent_pk (int) : Identifiant du service parent. Le service est placé à la racine si aucun parent renseigné.
+- acronym (str) : Acronyme du service.
+- address (str) : Adresse physique du service. Laisser vide si identique au service parent.
+- mail (str) : Adresse mail fonctionnelle du service.
+- phone (str) : Téléphone du standard du service. Formats national ou international acceptés. Séparation des nombres
+acceptés : points, espaces ou sans séparation.
+"""
+
 import csv
 
 from app.models import Service, Agent
@@ -30,6 +49,9 @@ def create_services():
 
             if row["acronym"]:
                 service.acronym = row["acronym"]
+
+            if row["address"]:
+                service.address = row["address"]
 
             if row["mail"]:
                 service.mail = row["mail"]

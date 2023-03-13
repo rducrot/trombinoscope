@@ -7,7 +7,7 @@ class ServiceAdmin(admin.ModelAdmin):
     list_display = ('name', 'acronym', 'parent')
     ordering = ('parent', 'name')
     list_filter = ('parent',)
-    search_fields = ('name', 'parent__name')
+    search_fields = ('name', 'parent__name', 'acronym', 'parent__acronym')
 
 
 class AgentAdmin(admin.ModelAdmin):
