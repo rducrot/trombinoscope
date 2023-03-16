@@ -1,10 +1,27 @@
 {% extends 'base.html' %}
+{% load widget_tweaks %}
 
 {% block nav-home %}active{% endblock nav-home %}
 
 {% block content %}
 <div class="col col-sm-6 mx-auto">
     <h1 class="w-100 text-center mt-4 mb-3">Liste des services</h1>
+
+    <form autocomplete="off" method="post" enctype="multipart/form-data">
+        <div class="input-group col-10 m-2">
+        {% for field in form.visible_fields %}
+            <div class="form-group">
+                {{ field|add_class:'form-control' }}
+                {% for error in field.errors %}
+                    <span class="help-block">{{ error }}</span>
+                {% endfor %}
+            </div>
+        {% endfor %}
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary input-group-text">Envoyer</button>
+        </div>
+    </form>
+
     {% if services %}
         <div class="accordion">
             {% include 'app/partials/service_list_snippet.html'%}

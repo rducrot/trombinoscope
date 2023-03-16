@@ -1,15 +1,24 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from app.models import Service, Agent
+from app.forms import AgentSelectForm
 
 
 @login_required
 def home(request):
     services = Service.objects.all()
+    form = AgentSelectForm()
     context = {
+        'form': form,
         'services': services,
     }
+    if request.method == 'POST':
+        form = AgentSelectForm(request.POST)
+        if form.is_valid():
+            agent_id = form.cleaned_data['id']
+            return redirect('agent', agent_id=agent_id)
+
     return render(request, 'app/home.html', context=context)
 
 
