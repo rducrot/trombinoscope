@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load mptt_tags %}
 
+{% block additional-head %}{{ form.media.css }}{% endblock additional-head %}
 {% block nav-phone-book %}active{% endblock nav-phone-book %}
 
 {% block content %}
@@ -40,13 +41,12 @@
                 <th>Prénom</th>
                 <th><i class="bi bi-envelope-at"></i> Mail</th>
                 <th><i class="bi bi-telephone"></i> Fixe</th>
-                <th><i class="bi bi-phone"></i> Mobile</th>
+                {% if user.is_authenticated %}<th><i class="bi bi-phone"></i> Mobile</th>{% endif %}
             </tr>
         </thead>
         {% for service in services %}
         <tr style="	scroll-margin-top: 1em;">
-            <th colspan="{% if user.is_authenticated %}4{% else %}5{% endif %}"
-                class="table-primary" id="service-{{ service.id }}">{{ service.name }}</th>
+            <th colspan="4" class="table-primary" id="service-{{ service.id }}">{{ service.name }}</th>
             {% if user.is_authenticated %}
             <th class="table-primary text-end" title="Trombinoscope {{service.name}}">
                 <a class="btn btn-outline-primary" href="{% url 'service' service.id %}">
@@ -58,13 +58,15 @@
         {% if service.mail %}
         <tr class="table-secondary">
             <th colspan="2"><i class="bi bi-envelope-at"></i> Adresse fonctionnelle</th>
-            <td colspan="3"><a href="mailto:{{ service.mail }}">{{ service.mail }}</a></td>
+            <td colspan="{% if user.is_authenticated %}3{% else %}2{% endif %}">
+                <a href="mailto:{{ service.mail }}">{{ service.mail }}</a>
+            </td>
         </tr>
         {% endif %}
         {% if service.phone %}
         <tr class="table-secondary">
             <th colspan="2"><i class="bi bi-telephone"></i> Standard</th>
-            <td colspan="3">{{ service.phone.as_national }}</td>
+            <td colspan="{% if user.is_authenticated %}3{% else %}2{% endif %}">{{ service.phone.as_national }}</td>
         </tr>
         {% endif %}
         {% for agent in service.agents.all|dictsort:"first_name"|dictsort:"last_name" %}

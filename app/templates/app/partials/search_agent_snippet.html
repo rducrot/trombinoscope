@@ -1,0 +1,21 @@
+{% block additional-head %}{{ form.media.css }}{% endblock additional-head %}
+
+<form autocomplete="off" method="post" enctype="multipart/form-data" class="my-2">
+        <div class="d-flex align-items-center justify-content-end">
+            {% for field in form.visible_fields %}
+            <div class="form-group">
+                {{ field }}
+                {% for error in field.errors %}
+                <span class="help-block">{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% endfor %}
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary btn-sm ms-1"><i class="bi bi-search"></i></button>
+        </div>
+</form>
+
+{% block additional-script %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+{{ form.media.js }}
+{% endblock additional-script %}

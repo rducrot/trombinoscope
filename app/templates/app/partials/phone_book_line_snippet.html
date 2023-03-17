@@ -3,5 +3,7 @@
     <td>{{ agent.first_name }}</td>
     <td>{% if agent.mail %}<a href="mailto:{{ agent.mail }}">{{ agent.mail }}</a>{% endif %}</td>
     <td>{% if agent.phone %}{{ agent.phone.as_national }}{% endif %}</td>
-    <td>{% if agent.mobile %}{{ agent.mobile.as_national }}{% endif %}</td>
+    {% if user.is_authenticated %}
+        <td>{% if agent.mobile %}{{ agent.mobile.as_national }}{% endif %}</td>
+    {% endif %}
 </tr>

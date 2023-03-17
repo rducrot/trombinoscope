@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_cleanup.apps.CleanupConfig',
     'django_extensions',
+    'django_select2',
     'mptt',
     'phonenumber_field',
     'widget_tweaks',
@@ -139,3 +140,22 @@ LOGOUT_REDIRECT_URL = LOGIN_URL
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR.joinpath('media/')
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': '127.0.0.1:6379/1',
+        "OPTIONS": {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        }
+    },
+    'select2': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://127.0.0.1:6379/2',
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        }
+    }
+}
+
+SELECT2_CACHE_BACKEND = 'select2'

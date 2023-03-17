@@ -16,7 +16,7 @@ def home(request):
     if request.method == 'POST':
         form = AgentSelectForm(request.POST)
         if form.is_valid():
-            agent_id = form.cleaned_data['id']
+            agent_id = form.cleaned_data['id'].id
             return redirect('agent', agent_id=agent_id)
 
     return render(request, 'app/home.html', context=context)

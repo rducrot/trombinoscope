@@ -16,7 +16,7 @@ cd trombinoscope
 2. S'assurer que les paquets suivants sont installés :
 ```shell
 sudo apt-get update
-sudo apt-get install python3 python3-pip python3-venv
+sudo apt-get install python3 python3-pip python3-venv redis-server
 ```
 3. Installation de l'application via le script `install.sh`.
 ```shell

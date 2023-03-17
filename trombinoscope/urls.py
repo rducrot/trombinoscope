@@ -18,7 +18,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView, PasswordChangeDoneView
 from django.contrib.staticfiles.storage import staticfiles_storage
-from django.urls import path
+from django.urls import path, include
 from django.views.generic.base import RedirectView
 
 import app.views
@@ -27,6 +27,7 @@ import authentication.views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('favicon.ico', RedirectView.as_view(url=staticfiles_storage.url('images/favicon.ico'))),
+    path("select2/", include("django_select2.urls")),
     path('', LoginView.as_view(template_name='authentication/login.html',
                                redirect_authenticated_user=True, ), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
