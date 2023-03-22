@@ -1,14 +1,14 @@
 {% load static %}
 
 <div class="card align-self-start m-2 {% if agent.role != 'Autre' %}border-primary{% endif %}"
-     style="max-width: 240px; min-height: 350px;">
-    <div class="card-header flex-fill">
+     style="width: 240px; min-height: 320px;">
+    <div class="card-header flex-fill jutify-content-center">
         {% if agent.image %}
-            <img src="{{ agent.image.url }}" class="card-img-top mb-1" alt="">
+            <img src="{{ agent.image.url }}" width="150" class="d-block rounded mx-auto mb-1" alt="">
         {% else %}
-            <img src="{% static 'images/default-picture.jpeg' %}" class="card-img-top mb-1" alt="">
+            <img src="{% static 'images/default-picture.jpeg' %}" width="210" class="d-block rounded mx-auto mb-1" alt="">
         {% endif %}
-        <div class="row  align-items-start">
+        <div class="row align-items-start">
             <a href="{% url 'agent' agent.id %}" class="card-title col-10 align-self-center link-dark h4">
                 {{ agent.first_name }} {{ agent.last_name }}
             </a>
